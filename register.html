@@ -1,0 +1,64 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-roboto relative">
+    <img alt="Wide snow field with mountains and beautiful aurora" class="absolute inset-0 w-full h-full object-cover z-0" height="1080" src="https://storage.googleapis.com/a1aa/image/gX2MDyHoyyJgF91iKNPbIWXPvpyuBcnIjSjkcYqdFSfB8fAUA.jpg" width="1920"/>
+    <div class="min-h-screen flex items-center justify-center relative z-10 bg-black bg-opacity-50">
+        <div class="bg-white bg-opacity-70 p-8 rounded-lg shadow-lg w-full max-w-md">
+            <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Register</h2>
+            <form action="/register" method="POST">
+                <!-- Display error message -->
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <ul>
+                            {% for category, message in messages %}
+                                <li class="text-red-500">{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+                
+                <div class="mb-4">
+                    <label for="username" class="block text-gray-700">Username</label>
+                    <input type="text" id="username" name="username" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="block text-gray-700">Password</label>
+                    <input type="password" id="password" name="password" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+                <div class="mb-6">
+                    <label for="confirm_password" class="block text-gray-700">Confirm Password</label>
+                    <input type="password" id="confirm_password" name="confirm_password" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <p id="password-error" class="text-red-500 hidden">Passwords do not match.</p>
+                </div>
+                <div class="flex items-center justify-between">
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Register</button>
+                    <a href="/login" class="text-blue-500 hover:underline">Login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Form validation to check if passwords match
+        document.querySelector('form').addEventListener('submit', function(event) {
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirm_password').value;
+            var errorElement = document.getElementById('password-error');
+            
+            if (password !== confirmPassword) {
+                errorElement.classList.remove('hidden');
+                event.preventDefault();
+            } else {
+                errorElement.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
