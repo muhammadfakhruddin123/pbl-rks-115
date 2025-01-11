@@ -1,7 +1,0 @@
-import os
-
-uploads_dir = 'uploads'
-if not os.path.exists(uploads_dir):
-    print(f"Folder {uploads_dir} tidak ditemukan!")
-else:
-    print(f"Folder {uploads_dir} ada dan bisa diakses.")
